@@ -7,15 +7,24 @@ __version__ = '0.0.1'
 __date__ = '2014-03-25'
 
 from Tkinter import *
+from TwiOAuthHandler import TwiOAuthHandler
 
 
-def LoadTextFromFile(ev):
+def get_favorites(auth):
+    pass
+
+
+def authenticate_user(ev):
     access_token = access_token_entry.get()
     access_token_secret = access_token_secret_entry.get()
 
     consumer_key = consumer_key_entry.get()
     consumer_key_secret = consumer_secret_entry.get()
 
+    oauthConnector = TwiOAuthHandler(consumer_key, consumer_key_secret, access_token, access_token_secret)
+    auth = oauthConnector.request_auth_object()
+
+    get_favorites(auth)
 
 #start draw window
 root = Tk(screenName="Favorites Grabber", className="Favorites Grabber")
@@ -33,8 +42,8 @@ access_token_secret_label = Label(textFrame, text="Enter Access Token Secret", f
 
 consumer_key_entry = Entry(textFrame)
 consumer_secret_entry = Entry(textFrame)
-consumer_key_label = Label(textFrame, text="Enter Consumer Token", font="Arial 16")
-consumer_secret_label = Label(textFrame, text="Enter Consumer Token Secret", font="Arial 16")
+consumer_key_label = Label(textFrame, text="Enter Consumer Key", font="Arial 16")
+consumer_secret_label = Label(textFrame, text="Enter Consumer Key Secret", font="Arial 16")
 
 
 access_token_label.place(x=90, y=15, width=220, height=20)
@@ -49,10 +58,10 @@ consumer_key_entry.place(x=90, y=200, width=220, height=40)
 consumer_secret_label.place(x=90, y=255, width=220, height=20)
 consumer_secret_entry.place(x=90, y=280, width=220, height=40)
 
-loadBtn = Button(panelFrame, text='Authorize App')
+loadBtn = Button(panelFrame, text='Get Favorites')
 loadBtn.place(x=90, y=10, width=220, height=80)
 
-loadBtn.bind("<Button-1>", LoadTextFromFile)
+loadBtn.bind("<Button-1>", authenticate_user)
 
 if __name__ == "__main__":
     root.mainloop()
