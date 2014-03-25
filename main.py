@@ -8,10 +8,12 @@ __date__ = '2014-03-25'
 
 from Tkinter import *
 from TwiOAuthHandler import TwiOAuthHandler
+from TwiFavoritesGrabber import TwiFavoritesGrabber
 
 
 def get_favorites(auth):
-    pass
+    favorites_grabber = TwiFavoritesGrabber(auth)
+    favorites_grabber.grab()
 
 
 def authenticate_user(ev):
