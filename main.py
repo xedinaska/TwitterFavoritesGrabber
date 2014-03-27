@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from TwitterAPILayer import TwiFavoritesGrabber, TwiOAuthHandler
 
 __author__ = 'Alex P'
 __email__ = 'Xedinaska@gmail.com'
@@ -7,8 +8,6 @@ __version__ = '0.0.1'
 __date__ = '2014-03-25'
 
 from Tkinter import *
-from TwiOAuthHandler import TwiOAuthHandler
-from TwiFavoritesGrabber import TwiFavoritesGrabber
 
 
 def get_favorites(auth):
