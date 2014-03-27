@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from TwitterAPILayer import TwiFavoritesGrabber, TwiOAuthHandler
+from TweetsHandling import TxtTweetsHandler
 
 __author__ = 'Alex P'
 __email__ = 'Xedinaska@gmail.com'
@@ -11,8 +12,15 @@ from Tkinter import *
 
 
 def get_favorites(auth):
-    favorites_grabber = TwiFavoritesGrabber(auth)
-    favorites_grabber.grab()
+    print("Start data grabbing..");
+
+    favorites_grabber = TwiFavoritesGrabber.TwiFavoritesGrabber(auth)
+    favorites = favorites_grabber.grab()
+
+    handler = TxtTweetsHandler.TxtTweetsHandler(favorites)
+    handler.save()
+
+    print("Done.")
 
 
 def authenticate_user(ev):
@@ -22,7 +30,7 @@ def authenticate_user(ev):
     consumer_key = consumer_key_entry.get()
     consumer_key_secret = consumer_secret_entry.get()
 
-    oauthConnector = TwiOAuthHandler(consumer_key, consumer_key_secret, access_token, access_token_secret)
+    oauthConnector = TwiOAuthHandler.TwiOAuthHandler(consumer_key, consumer_key_secret, access_token, access_token_secret)
     auth = oauthConnector.request_auth_object()
 
     get_favorites(auth)
@@ -45,7 +53,6 @@ consumer_key_entry = Entry(textFrame)
 consumer_secret_entry = Entry(textFrame)
 consumer_key_label = Label(textFrame, text="Enter Consumer Key", font="Arial 16")
 consumer_secret_label = Label(textFrame, text="Enter Consumer Key Secret", font="Arial 16")
-
 
 access_token_label.place(x=90, y=15, width=220, height=20)
 access_token_entry.place(x=90, y=40, width=220, height=40)
